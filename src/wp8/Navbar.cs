@@ -71,33 +71,12 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         private void UpdateBounds(object sender, EventArgs args)
         {
-            Thickness bounds = this.currentPage.GetVisibleBounds();
-            double calculated = 0;
-            if (this.currentPage.Orientation == PageOrientation.Portrait || this.currentPage.Orientation == PageOrientation.PortraitUp || this.currentPage.Orientation == PageOrientation.PortraitDown)
-            {
-                calculated = System.Windows.Application.Current.Host.Content.ActualHeight - (this.currentPage.Orientation == PageOrientation.PortraitUp ? bounds.Bottom : bounds.Top);
-            }
-            else if (this.currentPage.Orientation == PageOrientation.Landscape || this.currentPage.Orientation == PageOrientation.LandscapeLeft || this.currentPage.Orientation == PageOrientation.LandscapeRight)
-            {
-                calculated = System.Windows.Application.Current.Host.Content.ActualHeight - (this.currentPage.Orientation == PageOrientation.LandscapeLeft ? bounds.Right : bounds.Left);
-            }
-
-            double difference = Math.Round(previousHeight - calculated);
-
-            if (previousHeight != calculated && Math.Abs(difference) < System.Windows.Application.Current.Host.Content.ActualHeight / 8)
-            {
-                this.softKeyHeight = difference > 0 ? difference : 0;
-            }
-
-            previousHeight = calculated;
-            this.UpdateView(null, null);
-
+            this.softKeyHeight = System.Windows.Application.Current.Host.Content.ActualHeight
             if (monitor)
             {
                 this.DispatchResult();
             }
 
-            //this.CordovaView.CordovaBrowser.InvokeScript("eval", new string[] { "cordova.fireDocumentEvent('navbarchange', {height:" + softKeyHeight + "});" });
         }
 
         private void UpdateView(object sender, EventArgs args)
