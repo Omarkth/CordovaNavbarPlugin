@@ -30,7 +30,8 @@
 
 
     NavBar.prototype._change = function (height) {
-        NavBar.currentHeight = height;
+        this.currentHeight = height;
+        navbar.originalHeight = height + 'px';
         cordova.fireWindowEvent("navbarchange", { height: height });
     };
 
