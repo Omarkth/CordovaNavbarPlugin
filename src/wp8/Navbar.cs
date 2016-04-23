@@ -71,8 +71,12 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         private void UpdateBounds(object sender, EventArgs args)
         {
-            this.softKeyHeight = System.Windows.Application.Current.Host.Content.ActualHeight;
-            this.UpdateView(null, null);
+            try {
+				this.softKeyHeight = System.Windows.Application.Current.Host.Content.ActualHeight;
+            } catch (Exception e) {
+				this.softKeyHeight = -99;
+			}
+			this.UpdateView(null, null);
             if (monitor)
             {
                 this.DispatchResult();
