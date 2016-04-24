@@ -48,6 +48,12 @@ namespace WPCordovaClassLib.Cordova.Commands
                             }
                         }
                     }
+					
+					if (this.CordovaView != null){
+						this.DispatchResult("CordovaView was found");
+					}else{
+						this.DispatchResult("CordovaView was NOT found");
+					}
                 }
                 catch (Exception e)
                 {
