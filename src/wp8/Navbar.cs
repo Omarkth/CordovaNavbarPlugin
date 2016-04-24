@@ -49,6 +49,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 }
                 catch (Exception e)
                 {
+					this.DispatchResult("Failed to locate CordovaView in MainPage" + e.Message);
                     Debug.WriteLine("Failed to locate CordovaView in MainPage" + e.Message);
                     return;
                 }
@@ -83,7 +84,12 @@ namespace WPCordovaClassLib.Cordova.Commands
             }
 
             double difference = Math.Round(previousHeight - calculated);
-
+			
+			this.DispatchResult("prev: " + previousHeight);
+			this.DispatchResult("calc: " + calculated);
+			this.DispatchResult("actual: " + System.Windows.Application.Current.Host.Content.ActualHeight);
+			this.DispatchResult("diff: " + difference);
+			
             if (previousHeight != calculated && Math.Abs(difference) < System.Windows.Application.Current.Host.Content.ActualHeight / 8)
             {
                 this.softKeyHeight = difference > 0 ? difference : 0;
@@ -118,7 +124,14 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         private void DispatchResult()
         {
-            PluginResult result = new PluginResult(PluginResult.Status.OK, "omar test");
+            PluginResult result = new PluginResult(PluginResult.Status.OK, softKeyHeight);
+            result.KeepCallback = true;
+            DispatchCommandResult(result);
+        }
+		
+        private void DispatchResult(string myResult)
+        {
+            PluginResult result = new PluginResult(PluginResult.Status.OK, myResult);
             result.KeepCallback = true;
             DispatchCommandResult(result);
         }
