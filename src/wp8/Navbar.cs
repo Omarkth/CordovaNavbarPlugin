@@ -27,6 +27,7 @@ namespace WPCordovaClassLib.Cordova.Commands
             previousHeight = System.Windows.Application.Current.Host.Content.ActualHeight;
             if (VisibleBoundsExtensions.IsSupported)
             {
+				this.DispatchResult("VisibleBoundsExtensions is supported");
                 this.currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content as PhoneApplicationPage;
 
                 try
@@ -57,7 +58,9 @@ namespace WPCordovaClassLib.Cordova.Commands
                 this.currentPage.VisibleBoundsChangedAdd(UpdateBounds);
                 this.currentPage.OrientationChanged += UpdateView;
                 UpdateBounds(null, null);
-            }
+            } else {
+				this.DispatchResult("VisibleBoundsExtensions is NOT supported");
+			}
         }
 
         public void start(string options)
