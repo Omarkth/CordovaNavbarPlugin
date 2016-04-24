@@ -7,7 +7,7 @@
 
     var NavBar = function () {
 
-        this.currentHeight = -1;
+        //this.currentHeight = -1;
 
         // Create new event handlers on the window (returns a channel instance)
         this.channels = {
@@ -28,9 +28,9 @@
     };
 
 
-    NavBar.prototype._change = function (height) {
-        navbar.currentHeight = height;
-        cordova.fireWindowEvent("navbarchange", { height: height });
+    NavBar.prototype._change = function (obj) {
+        //navbar.currentHeight = height;
+        cordova.fireWindowEvent("navbarchange", obj);
     };
 
     NavBar.prototype._error = function (e) {

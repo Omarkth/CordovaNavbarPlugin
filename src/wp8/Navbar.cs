@@ -118,7 +118,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 
         private void DispatchResult()
         {
-            PluginResult result = new PluginResult(PluginResult.Status.OK, softKeyHeight);
+            PluginResult result = new PluginResult(PluginResult.Status.OK, "omar test");
             result.KeepCallback = true;
             DispatchCommandResult(result);
         }
