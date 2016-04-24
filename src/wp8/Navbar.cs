@@ -131,6 +131,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 		
         private void DispatchResult(string myResult)
         {
+			if (!monitor) return;
             PluginResult result = new PluginResult(PluginResult.Status.OK, myResult);
             result.KeepCallback = true;
             DispatchCommandResult(result);
