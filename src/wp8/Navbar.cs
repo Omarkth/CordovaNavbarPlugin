@@ -20,6 +20,7 @@ namespace WPCordovaClassLib.Cordova.Commands
         private PhoneApplicationPage currentPage;
         private CordovaView CordovaView;
         private bool monitor = false;
+		private string _log = "";
 
         public NavBar()
         {
@@ -127,11 +128,20 @@ namespace WPCordovaClassLib.Cordova.Commands
             PluginResult result = new PluginResult(PluginResult.Status.OK, softKeyHeight);
             result.KeepCallback = true;
             DispatchCommandResult(result);
+			
+			if (!string.IsNullOrEmpty(_log)){
+				PluginResult result2 = new PluginResult(PluginResult.Status.OK, _log);
+				result2.KeepCallback = true;
+				DispatchCommandResult(result2);
+			}
         }
 		
         private void DispatchResult(string myResult)
         {
-			if (!monitor) return;
+			if (!monitor) {
+				_log += myResult + "###";
+				return;
+			};
             PluginResult result = new PluginResult(PluginResult.Status.OK, myResult);
             result.KeepCallback = true;
             DispatchCommandResult(result);
